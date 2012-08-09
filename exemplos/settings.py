@@ -1,6 +1,6 @@
 # Django settings for Mocambos_Portal project.
-BASE_ROOT = '/home/taina/CasaDeCulturaTaina/'
-ROOT_URLCONF = 'CasaDeCulturaTaina.urls'
+BASE_ROOT = '/home/mocambos/portal_taina/'
+ROOT_URLCONF = 'portal_taina.urls'
 GITANNEX_DIR = 'gitannex'
 SERIALIZED_DIR = 'serialized'
 PORTAL_NAME = 'taina.mocambos.net'
@@ -87,7 +87,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/taina/CasaDeCulturaTaina/static/sta',
+    '/home/mocambos/portal_taina/static/sta',
 )
 
 # List of finder classes that know how to find static files in
@@ -124,6 +124,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+
 )
 
 INSTALLED_APPS = (
@@ -141,10 +142,13 @@ INSTALLED_APPS = (
 #    'filer',
 #    'grappelli',
 #    'filebrowser',
+    "registration_defaults",
     'django.contrib.admin',
 #    'django_bfm',
     'mmedia',
     'gitannex',
+    'baobaxia',
+    'registration',
 #    'debug_toolbar',
 )
 
@@ -201,8 +205,7 @@ LOGGING = {
 # 
 
 import ldap
-from django_auth_ldap.config import LDAPSearch, GroupOfNamesType
-
+from django_auth_ldap.config import LDAPSearch, GroupOfNamesType, PosixGroupType
 
 # Baseline configuration.
 AUTH_LDAP_SERVER_URI = "ldap://localhost"
@@ -219,6 +222,7 @@ AUTH_LDAP_GROUP_SEARCH = LDAPSearch("dc=mocambos,dc=net",
 )
 #AUTH_LDAP_GROUP_TYPE = GroupOfNamesType(name_attr="cn")
 AUTH_LDAP_GROUP_TYPE = GroupOfNamesType()
+#AUTH_LDAP_GROUP_TYPE = PosixGroupType()
 
 # # Only users in this group can log in.
 # #AUTH_LDAP_REQUIRE_GROUP = "cn=enabled,ou=django,ou=groups,dc=example,dc=com"
@@ -266,3 +270,9 @@ AUTHENTICATION_BACKENDS = (
 )
 
 #FILER_STATICMEDIA_PREFIX = '/media/filer/'
+
+import logging
+
+logger = logging.getLogger('django_auth_ldap')
+logger.addHandler(logging.StreamHandler())
+logger.setLevel(logging.DEBUG)

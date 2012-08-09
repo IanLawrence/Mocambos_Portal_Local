@@ -6,6 +6,7 @@ pip install django==1.3.1
 pip install django-auth-ldap
 pip install python-ldap
 pip install pillow 
+pip install -e requirements.txt
 
 # # Pacotes necessarios para django-filer
 # sudo apt-get install libfreetype6-dev liblcms1-dev libjpeg8-dev
